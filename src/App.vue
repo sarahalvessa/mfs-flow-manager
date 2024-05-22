@@ -20,3 +20,20 @@ export default {
   }
 }
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/*ADICIONAR AQUI TODOS OS CSS QUE SERÃO PASSADOS PARA OS DEMAIS COMPONENTES*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  height: 100vh;
+}
+</style>
