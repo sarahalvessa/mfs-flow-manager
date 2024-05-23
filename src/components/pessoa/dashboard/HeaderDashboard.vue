@@ -1,7 +1,7 @@
 <template>
   <div class="div-1">
     <div class="div-2">
-      <h2>Olá, Sarah</h2>
+      <h2>Olá, Sarah<img src="https://raw.githubusercontent.com/kaueMarques/kaueMarques/master/hi.gif" height="30px"></h2>
       <p>19 May 2022</p>
     </div>
   </div>
