@@ -35,7 +35,7 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const usuarioResponse = await get(`/api/usuarios/3/`)
+        const usuarioResponse = await get(`/api/usuarios/1/`)
         this.usuario = usuarioResponse.nome
       } catch (error) {
         console.error('Erro ao buscar dados:', error)
