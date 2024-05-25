@@ -1,8 +1,8 @@
 <template>
   <div class="div-1">
     <div class="div-2">
-      <h2>Olá, Sarah<img src="https://raw.githubusercontent.com/kaueMarques/kaueMarques/master/hi.gif" height="30px"></h2>
-      <p>19 May 2022</p>
+      <h2>Olá, {{ usuario }}<img src="https://raw.githubusercontent.com/kaueMarques/kaueMarques/master/hi.gif" height="30px"></h2>
+      <p>{{ dataAtual }}</p>
     </div>
   </div>
   <div class="div-3">
@@ -17,13 +17,38 @@
 </template>
 <script>
 
-import ViewDashboardOutline from 'vue-material-design-icons/ViewDashboardOutline.vue';
-import Magnify from 'vue-material-design-icons/Magnify.vue';
+import ViewDashboardOutline from 'vue-material-design-icons/ViewDashboardOutline.vue'
+import Magnify from 'vue-material-design-icons/Magnify.vue'
+import { get } from '/src/api.js'
 
 export default {
+  data() {
+    return {
+      usuario: '',
+      dataAtual: '',
+    }
+  },
   components: {
     ViewDashboardOutline,
     Magnify
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const usuarioResponse = await get(`/api/usuarios/3/`)
+        this.usuario = usuarioResponse.nome
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      }
+    },
+    obterDataAtual() {
+      const opcoes = { year: 'numeric', month: 'long', day: 'numeric' }
+      this.dataAtual = new Date().toLocaleDateString('pt-BR', opcoes)
+    }
+  },
+  mounted() {
+    this.fetchData(),
+    this.obterDataAtual()
   }
 }
 </script>
