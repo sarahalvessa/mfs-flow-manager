@@ -5,8 +5,6 @@
       <HeaderDashboard />
       <div class="div-3">
         <CardDashboard />
-        <CardDashboard />
-        <CardDashboard />
       </div>
     </div>
   </div>

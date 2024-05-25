@@ -10,15 +10,15 @@
       </div>
 
       <div class="div-5">
-        <div class="div-6">
+        <div class="div-6" v-for="(tarefa, indice) in usuarioTarefas" :key="indice">
           <div class="div-7 d-flex align-items-center justify-content-between"> 
-            <p class="customized-color-p bold-p">Design new ui presentation</p>
+            <p class="customized-color-p bold-p">{{ tarefa.nome }}</p>
             <PlusCircle />
           </div>
-          <span>Dribble marketing</span>
+          <span>{{ tarefa.descricao }}</span>
 
           <div class="div-8 d-flex align-items-center justify-content-center">
-            <p>24 Aug 2024</p>
+            <p>{{ tarefa.created_at }}</p>
           </div>
         </div>
       </div>
@@ -27,17 +27,33 @@
   <ModalDashboard :modalAberto="modalAberto" @fechar="fecharModal" @salvar="capturarDados" />
 </template>
 <script>
+
 import PlusCircle from 'vue-material-design-icons/PlusCircle.vue'
 import ModalDashboard from '/src/components/pessoa/dashboard/modals/ModalDashboard.vue'
+import { get } from '/src/api.js'
+
 export default {
   data() {
     return {
       modalAberto: false,
       titulo: '',
       descricao: '',
+      usuarioTarefas: '',
+      dataCriacaoTarefa: '',
     }
   },
   methods: {
+    async fetchData() {
+      const usuarioResponse = await get(`/api/usuarios/1/`);
+        this.usuarioTarefas = usuarioResponse.tarefas.map(tarefa => ({
+          ...tarefa,
+          created_at: new Date(tarefa.created_at).toLocaleDateString('pt-BR'),
+        }))
+    },
+    obterDataAtual() {
+      const opcoes = { year: 'numeric', month: 'long', day: 'numeric' }
+      this.dataAtual = new Date().toLocaleDateString('pt-BR', opcoes)
+    },
     abrirModal() {
       this.modalAberto = true
     },
@@ -47,12 +63,14 @@ export default {
     capturarDados(dados) {
       this.titulo = dados.titulo
       this.descricao = dados.descricao
-      console.log('Dados da Tarefa:', this.titulo)
     }
   },
   components: {
     PlusCircle,
     ModalDashboard,
+  },
+  mounted() {
+    this.fetchData()
   }
 }
 </script>
