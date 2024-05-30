@@ -1,18 +1,18 @@
 <template>
   <div class="container-dashboardpage">
-    <NavBar />
     <div class="div-2">
       <HeaderDashboard />
       <div class="div-3">
-        <CardDashboard />
+        <CardDashboard tipoCard="para fazer"/>
+        <CardDashboard tipoCard="em progresso"/>
+        <CardDashboard tipoCard="concluido"/>
       </div>
     </div>
   </div>
 </template>
 <script>
-import NavBar from '/src/components/pessoa/dashboard/NavBar.vue'
 import HeaderDashboard from '/src/components/pessoa/dashboard/HeaderDashboard.vue'
-import CardDashboard from '/src/components/pessoa/dashboard/CardDashboard.vue'
+import CardDashboard from '/src/components/pessoa/dashboard/cards/CardDashboard.vue'
 
 export default {
   data() {
@@ -21,7 +21,6 @@ export default {
     }
   },
   components: {
-    NavBar,
     HeaderDashboard,
     CardDashboard
   },
@@ -43,7 +42,7 @@ export default {
 .container-dashboardpage {
   height: 100vh;
   width: 100%;
-  background-color: #eeeeee;
+  background-color: #ffffff;
   display: flex;
 }
 .div-2 {
