@@ -15,7 +15,7 @@
   
 import ParaFazer from '/src/components/pessoa/dashboard/cards/ParaFazer.vue'
 import EmProgresso from '/src/components/pessoa/dashboard/cards/EmProgresso.vue'
-import Concluido from '/src/components/pessoa/dashboard/cards/Concluido.vue';
+import Concluido from '/src/components/pessoa/dashboard/cards/Concluido.vue'
 
 export default {
   components: {
