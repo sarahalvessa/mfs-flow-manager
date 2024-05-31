@@ -10,16 +10,18 @@
         <div class="div-7 d-flex align-items-center justify-content-between"> 
           <p class="customized-color-p bold-p">{{ tarefa.nome }}</p>
           <div>
-            <DotsHorizontal @click="capturarIdTarefa(tarefa.tarefa_id)" style="cursor: pointer;"/>
-            <Delete @click="capturarIdTarefa(tarefa.tarefa_id)" style="cursor: pointer;"/>
+            <DotsHorizontal @click="deletarTarefa(tarefa.tarefa_id)" style="cursor: pointer;"/>
+            <Delete @click="abrirPopUp(tarefa.tarefa_id)" style="cursor: pointer;"/>
           </div>
         </div>
         <span>{{ tarefa.descricao }}</span>
       </div>
     </div>
   </div>
+
 <Loading :isLoading="isLoading" />
-<ModalDashboard :modalAberto="modalAberto" @fechar="fecharModal" @salvar="capturarDados" />
+<ModalDashboard :modalAberto="modalAberto" @fechar="fecharModal" @salvar="inserirTarefa" />
+<PopUpConfirmacao :isPopUp="isPopUp" @cancel="cancelarExclusao" @confirm="excluirTarefa" />
 </template>
 <script>
 
@@ -27,28 +29,34 @@ import Plus from 'vue-material-design-icons/Plus.vue'
 import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
 import ModalDashboard from '/src/components/pessoa/dashboard/modals/ModalDashboard.vue'
+import PopUpConfirmacao from '/src/components/pessoa/dashboard/modals/PopUpConfirmacao.vue'
 import Loading from '/src/components/pessoa/dashboard/Loading.vue'
-import { get, post } from '/src/api.js'
+import { get, post, del } from '/src/api.js'
 
 export default {
   data() {
     return {
       modalAberto: false,
       isLoading: false,
+      isPopUp: false,
       titulo: '',
       descricao: '',
       usuarioTarefasParaFazer: '',
-      dataCriacaoTarefa: '',
+      usuarioTarefaId: null,
     }
   },
   methods: {
     async fetchData() {
-      const usuarioResponse = await get(`/api/usuarios/1/`);
-      this.usuarioTarefasParaFazer = usuarioResponse.tarefas
-        .filter(tarefa => tarefa.status_id === 2)
-        .map(tarefa => ({
-          ...tarefa,
-      }))
+      try {
+        const usuarioResponse = await get(`/api/usuarios/1/`)
+        this.usuarioTarefasParaFazer = usuarioResponse.tarefas
+          .filter(tarefa => tarefa.status_id === 2)
+          .map(tarefa => ({
+            ...tarefa, 
+        }))
+      } catch (error) {
+        console.error('Erro ao carregar tarefas:', error)
+      }
     },
     obterDataAtual() {
       const opcoes = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -60,7 +68,7 @@ export default {
     fecharModal() {
       this.modalAberto = false
     },
-    async capturarDados(dados) {
+    async inserirTarefa(dados) {
       this.isLoading = true
       try {
         const payload = {
@@ -75,10 +83,28 @@ export default {
       } finally {
         this.isLoading = false      
         this.modalAberto = false
+        this.fetchData()
       }
     },
-    capturarIdTarefa(id) {
-      console.log("ID da tarefa clicada:", id);
+    abrirPopUp(id) {
+      this.usuarioTarefaId = id
+      this.isPopUp = true
+    },
+    cancelarExclusao() {
+      this.isPopUp = false
+    },
+    async excluirTarefa() {
+      this.isLoading = true
+      try {
+        await del(`/api/tarefas/${this.usuarioTarefaId}`)
+      } catch (error) {
+        console.error('Erro ao excluir tarefa:', error)
+      } finally {
+        this.isPopUp = false
+        this.isLoading = false
+        this.fetchData()
+      }
+
     }
   },
   components: {
@@ -86,6 +112,7 @@ export default {
     DotsHorizontal,
     Delete,
     ModalDashboard,
+    PopUpConfirmacao,
     Loading,
   },
   props: {
