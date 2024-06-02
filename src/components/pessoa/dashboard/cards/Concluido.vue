@@ -20,7 +20,7 @@
   </div>
 
 <Loading :isLoading="isLoading" />
-<ModalDashboard :modalAberto="modalAberto" @fechar="fecharModal" @salvar="inserirTarefa" />
+<CadastrarTarefa :modalAberto="modalAberto" @fechar="fecharModal" @salvar="inserirTarefa" />
 <PopUpConfirmacao :isPopUp="isPopUp" @cancel="cancelarExclusao" @confirm="excluirTarefa" />
 </template>
 <script>
@@ -28,7 +28,7 @@
 import Plus from 'vue-material-design-icons/Plus.vue'
 import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue'
 import Delete from 'vue-material-design-icons/Delete.vue'
-import ModalDashboard from '/src/components/pessoa/dashboard/modals/ModalDashboard.vue'
+import CadastrarTarefa from '/src/components/pessoa/dashboard/modals/CadastrarTarefa.vue'
 import PopUpConfirmacao from '/src/components/pessoa/dashboard/modals/PopUpConfirmacao.vue'
 import Loading from '/src/components/pessoa/dashboard/Loading.vue'
 import { get, post, del } from '/src/api.js'
@@ -111,7 +111,7 @@ export default {
     Plus,
     DotsHorizontal,
     Delete,
-    ModalDashboard,
+    CadastrarTarefa,
     PopUpConfirmacao,
     Loading,
   },
