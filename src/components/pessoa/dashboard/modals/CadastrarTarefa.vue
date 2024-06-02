@@ -2,11 +2,9 @@
   <div class="modal" role="dialog" v-if="modalAberto">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex align-tems-center justify-content-between">
           <h5 class="modal-title">Cadastrar Nova Tarefa</h5>
-          <button type="button" class="close" @click="fecharModal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <Close @click="fecharModal" style="cursor: pointer;"/>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -28,7 +26,12 @@
 </template>
  
 <script>
+import Close from 'vue-material-design-icons/Close.vue'
+
 export default {
+  components: {
+    Close,
+  },
   props: {
     modalAberto: Boolean,
   },
@@ -53,6 +56,11 @@ export default {
 </script>
 <style scoped>
 .modal {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+.modal-content {
+  width: 500px;
 }
 </style>
