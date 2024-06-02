@@ -1,14 +1,13 @@
 <template>
-  <div class="modal" tabindex="-1" role="dialog" v-if="isPopUp">
+  <div class="modal d-flex align-items-center justify-content-center" tabindex="-1" role="dialog" v-if="isPopUp">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex justify-content-between">
           <h5 class="modal-title">Confirmar Exclusão</h5>
-          <button type="button" class="close" @click="cancelDelete">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <Close @click="cancelDelete" style="cursor: pointer;"/>
         </div>
-        <div class="modal-body">
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <DeleteOutline  :size="66"/>
           <p>Tem certeza que deseja excluir esta tarefa?</p>
         </div>
         <div class="modal-footer">
@@ -20,7 +19,14 @@
   </div>
 </template>
 <script>
+import Close from 'vue-material-design-icons/Close.vue'
+import DeleteOutline from 'vue-material-design-icons/DeleteOutline.vue'
+
 export default {
+  components: {
+    DeleteOutline,
+    Close,
+  },
   props: {
     isPopUp: Boolean,
   },
@@ -36,6 +42,11 @@ export default {
 </script>
 <style scoped>
 .modal {
-    display: block;
+  display: flex;
+}
+.modal-body {
+  flex-direction: column;
+  width: 500px;
+  margin: 30px 0 30px 0;
 }
 </style>
