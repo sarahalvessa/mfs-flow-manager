@@ -1,25 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/dashboard" v-if="isDashboard">dashboard</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
+
 <script>
 export default {
-  data() {
-    return {
-      isDashboard: true
-    }
-  },
-  watch: {
-    '$route'(to) {
-      if (to.path === '/dashboard') {
-        this.isDashboard = false
-      }
-    }
-  }
-}
+  name: 'App'
+};
 </script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');

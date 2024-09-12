@@ -126,38 +126,5 @@ export default {
   }
 }
 </script>
-<style scoped>
-p {
-  color: #8D8E90;
-  font-size: 14px;
-}
-.customized-color-p {
-  color: black;
-}
-.bold-p {
-  font-weight: bold;
-}
-.div-2 {
-  width: 95%;
-  margin: 15px 0 15px 0;
-  flex-direction: column;
-}
-.div-3 {
-  width: 100%;
-}
-.div-5 {
-  width: 100%;
-}
-.div-6 {
-  margin-top: 15px;
-  border: 1px solid #dad5d5;
-  width: 100%;
-  border-radius: 12px;
-  padding: 5px;
-  background-color: #ffffff;
-}
-.div-6 span {
-  font-size: 14px;
-  color: #8D8E90;
-}
-</style>
+
+<style scoped src="./Index.css"></style>
