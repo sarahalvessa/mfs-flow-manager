@@ -1,18 +1,18 @@
 <template>
-  <div class="container-dashboardpage">
-    <div class="div-2">
-      <HeaderDashboard />
-      <div class="div-3">
-        <CardDashboard tipoCard="para fazer"/>
-        <CardDashboard tipoCard="em progresso"/>
-        <CardDashboard tipoCard="concluido"/>
-      </div>
+  <div class="div-2">
+    <HeaderDashboard />
+    <div class="div-3">
+      <Concluido/>
+      <EmProgresso/>
+      <ParaFazer/>
     </div>
   </div>
 </template>
 <script>
 import HeaderDashboard from '/src/components/pessoa/dashboard/HeaderDashboard.vue'
-import CardDashboard from '/src/components/pessoa/dashboard/cards/CardDashboard.vue'
+import Concluido from '/src/components/pessoa/dashboard/cards/Concluido.vue';
+import EmProgresso from '/src/components/pessoa/dashboard/cards/EmProgresso.vue';
+import ParaFazer from '/src/components/pessoa/dashboard/cards/ParaFazer.vue';
 
 export default {
   data() {
@@ -22,7 +22,9 @@ export default {
   },
   components: {
     HeaderDashboard,
-    CardDashboard
+    Concluido,
+    EmProgresso,
+    ParaFazer
   },
   methods: {
     openModal() {
@@ -39,18 +41,9 @@ export default {
 </script>
 
 <style scoped>
-.container-dashboardpage {
-  height: 100vh;
-  width: 100%;
-  background-color: #ffffff;
-  display: flex;
-}
-.div-2 {
-  width: 100%;
-}
 .div-3 {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 </style>
