@@ -17,6 +17,16 @@ export const get = async (endpoint) => {
   }
 }
 
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('authToken')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+}, error => {
+  return Promise.reject(error)
+})
+
 export const post = async (endpoint, payload) => {
   try {
     const response = await api.post(endpoint, payload)

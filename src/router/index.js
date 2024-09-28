@@ -1,11 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardPage from '/src/pages/pessoa/dashboard/DashboardPage.vue'
+import DashboardPage from '../pages/pessoa/dashboard/DashboardPage.vue'
+import Login from '../pages/pessoa/Auth/Login.vue'
+
+function isAuthenticated() {
+  return !!localStorage.getItem('authToken')
+}
 
 const routes = [
   {
-    path: '/dashboard',
+    path: '/dashboard/:usuarioId',
     name: 'dashboard',
-    component: DashboardPage
+    component: DashboardPage,
+    beforeEnter: (to, from, next) => {
+      if (!isAuthenticated()) {
+        return next({ name: 'login' })
+      }
+      next()
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 
