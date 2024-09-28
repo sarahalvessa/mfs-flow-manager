@@ -3,6 +3,7 @@
     <div class="div-2">
       <h2>Olá, {{ usuario }}<img src="https://raw.githubusercontent.com/kaueMarques/kaueMarques/master/hi.gif" height="30px"></h2>
       <p>{{ dataAtual }}</p>
+      <button @click="logout" class="logout-button">Sair</button>
     </div>
   </div>
   <div class="div-3">
@@ -19,7 +20,7 @@
 
 import ViewDashboardOutline from 'vue-material-design-icons/ViewDashboardOutline.vue'
 import Magnify from 'vue-material-design-icons/Magnify.vue'
-import { get } from '/src/api.js'
+import { get, post } from '/src/api.js'
 
 export default {
   data() {
@@ -35,11 +36,20 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const usuarioResponse = await get(`/api/usuarios/1/`)
+        const usuarioResponse = await get(`/api/usuarios/${this.$route.params.usuarioId}/`)
         this.usuario = usuarioResponse.nome
       } catch (error) {
         console.error('Erro ao buscar dados:', error)
       }
+    },
+    async logout() {
+      try {
+        await post('/api/logout/')
+        localStorage.removeItem('authToken')
+        this.$router.push('/login')
+      } catch (error) {
+        console.error('Erro ao sair:', error)
+      } 
     },
     obterDataAtual() {
       const opcoes = { year: 'numeric', month: 'long', day: 'numeric' }
