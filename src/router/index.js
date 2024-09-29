@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DashboardPage from '../pages/pessoa/dashboard/DashboardPage.vue'
 import Login from '../pages/pessoa/Auth/Login.vue'
+import Register from '../pages/pessoa/Auth/Register.vue' // Importe a página de registro
 
 function isAuthenticated() {
   return !!localStorage.getItem('authToken')
@@ -22,6 +23,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/register', // Adicione a rota de registro
+    name: 'register',
+    component: Register // Use o componente de registro
   }
 ]
 
