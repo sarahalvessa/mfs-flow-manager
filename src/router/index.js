@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DashboardPage from '../pages/pessoa/dashboard/DashboardPage.vue'
 import Login from '../pages/pessoa/Auth/Login.vue'
-import Register from '../pages/pessoa/Auth/Register.vue' // Importe a página de registro
+import Register from '../pages/pessoa/Auth/Register.vue'
 
 function isAuthenticated() {
   return !!localStorage.getItem('authToken')
@@ -9,7 +9,7 @@ function isAuthenticated() {
 
 const routes = [
   {
-    path: '/dashboard/:usuarioId',
+    path: '/dashboard',
     name: 'dashboard',
     component: DashboardPage,
     beforeEnter: (to, from, next) => {
@@ -25,9 +25,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/register', // Adicione a rota de registro
+    path: '/register',
     name: 'register',
-    component: Register // Use o componente de registro
+    component: Register
   }
 ]
 

@@ -36,7 +36,7 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const usuarioResponse = await get(`/api/usuarios/${this.$route.params.usuarioId}/`)
+        const usuarioResponse = await get(`/api/usuarios/${this.userId}/`)
         this.usuario = usuarioResponse.nome
       } catch (error) {
         console.error('Erro ao buscar dados:', error)
@@ -59,7 +59,12 @@ export default {
   mounted() {
     this.fetchData(),
     this.obterDataAtual()
-  }
+  },
+  computed: {
+    userId() {
+      return this.$store.state.user.id;
+    },
+  },
 }
 </script>
   

@@ -34,7 +34,8 @@ export default {
       const response = await post(`/api/login/`, payload)
       console.log(response)
       localStorage.setItem('authToken', response.token)
-      this.$router.push({ name: 'dashboard', params: { usuarioId: response.usuario_id } })
+      this.$store.commit('setUser', response.usuario_id);
+      this.$router.push({ name: 'dashboard'})
       } catch (error) {
         console.error('Erro ao efetuar login:', error)
       }
