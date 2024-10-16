@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardPage from '../pages/pessoa/dashboard/DashboardPage.vue'
-import Login from '../pages/pessoa/Auth/Login.vue'
-import Register from '../pages/pessoa/Auth/Register.vue'
+import DashboardPage from '../pages/dashboard/DashboardPage.vue'
+import Login from '../pages/Auth/Login.vue'
+import Register from '../pages/Auth/Register.vue'
 
 function isAuthenticated() {
   return !!localStorage.getItem('authToken')
