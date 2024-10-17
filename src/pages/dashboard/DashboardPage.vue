@@ -1,18 +1,10 @@
 <template>
-  <div class="div-2">
-    <HeaderDashboard />
-    <div class="div-3">
-      <Concluido/>
-      <EmProgresso/>
-      <ParaFazer/>
-    </div>
+  <div class="div-1">
+    <NavBar />
   </div>
 </template>
 <script>
-import HeaderDashboard from '/src/components/dashboard/HeaderDashboard.vue'
-import Concluido from '/src/components/dashboard/cards/Concluido.vue';
-import EmProgresso from '/src/components/dashboard/cards/EmProgresso.vue';
-import ParaFazer from '/src/components/dashboard/cards/ParaFazer.vue';
+import NavBar from '/src/components/dashboard/NavBar.vue'
 
 export default {
   data() {
@@ -21,10 +13,7 @@ export default {
     }
   },
   components: {
-    HeaderDashboard,
-    Concluido,
-    EmProgresso,
-    ParaFazer
+    NavBar
   },
   methods: {
     openModal() {
@@ -41,9 +30,4 @@ export default {
 </script>
 
 <style scoped>
-.div-3 {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
 </style>
