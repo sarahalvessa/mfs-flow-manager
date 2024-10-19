@@ -1,19 +1,24 @@
-import { createStore } from 'vuex';
+import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
   state: {
     user: {
       id: null,
+      name: null,
     },
   },
   mutations: {
-    setUser(state, userId) {
-      state.user.id = userId;
+    setUser(state, user) {
+      state.user.id = user.id
+      state.user.name = user.name
     },
     clearUser(state) {
-      state.user.id = null;
+      state.user.id = null
+      state.user.name = null
     },
   },
+  plugins: [createPersistedState()]
 })
 
-export default store;
+export default store

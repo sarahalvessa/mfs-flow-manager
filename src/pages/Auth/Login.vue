@@ -54,8 +54,7 @@ export default {
         const response = await post(`/api/login/`, payload)
         toast.success('Authenticated user')
         localStorage.setItem('authToken', response.token)
-        this.$store.commit('setUser', response.usuario_id);
-        this.$router.push({ name: 'dashboard'})
+        this.$store.commit('setUser', { id: response.usuario_id, name: response.nome });        this.$router.push({ name: 'dashboard'})
       } catch (error) {
         return toast.error('Invalid email or password')
       }
